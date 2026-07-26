@@ -43,3 +43,9 @@ def test_normalize_is_idempotent_and_folds():
 def test_clean_text_untouched_semantically():
     # hardened filter must not over-trigger on benign text
     assert hardened_keyword_filter("please summarize this article", TRIG) is False
+
+
+def test_normalize_misses_out_of_map_homoglyph():
+    # honest limit: a homoglyph outside the confusable map is NOT folded
+    word = "i" + chr(0x0261) + "nore"      # 'iɡnore' with script-g U+0261
+    assert normalize(word) != "ignore"     # documents the coverage gap, not a bug

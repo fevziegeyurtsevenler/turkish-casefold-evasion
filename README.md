@@ -30,18 +30,24 @@ This repo **measures the bypass**, ships the **evasion dataset**, and gives the 
 
 ## 📉 The finding
 
-Applying three Turkish-flavoured evasions to 15 common trigger phrases, against a typical
-`lower()`-and-substring filter:
+Applying three Turkish-flavoured evasions to 15 common trigger phrases, against **a naive
+`str.lower()` + substring filter (not an ML guard)**:
 
-| Evasion | Bypass rate vs naive filter ↑(attacker) | Caught after the fix |
-|---------|:---------------------------------------:|:--------------------:|
+| Evasion | Bypass rate vs naive filter ↑(attacker) | Caught after the fix* |
+|---------|:---------------------------------------:|:---------------------:|
 | dotless-i (`i→ı`, `I→İ`) | **91%** | 100% |
 | confusable (Cyrillic/Greek lookalikes) | **100%** | 100% |
 | combining-mark (`i` + U+0307) | **91%** | 100% |
 | **overall** | **94.6%** | **100%** |
 
-**94.6% of case-folded/confusable evasions slipped past the naive filter; the one-line fix caught
-all of them.** Reproduce with `python build_study.py` (writes `study.json` + the dataset).
+**94.6% of case-folded/confusable evasions slipped past the naive filter.** Reproduce with
+`python build_study.py` (writes `study.json` + the dataset).
+
+> *The 100% "caught after the fix" is **on this in-map evasion set** — `normalize()` reverses
+> exactly the transforms these generators apply, so it's a soundness check, not proof of universal
+> coverage. `normalize()` folds the confusables in its map + NFKC; a homoglyph **outside** the map
+> (e.g. `U+0261` script-g, `"iɡnore"`) still slips through. Extend the map for your threat model.
+> The robust, un-gameable number here is the **94.6% bypass of the naive filter**.
 
 > Note: this targets **naive keyword/regex** filters. Modern **ML guards** (e.g. ProtectAI's
 > deberta) are far more robust to these tricks — see the companion study
@@ -82,9 +88,12 @@ Fields: `trigger`, `evasion`, `evaded_text`, `original_caught_by_naive`,
 ## ⚖️ Honesty & limits
 
 - The 94.6% is against a **naive `lower()`+substring** filter — a common but weak design. It is not
-  a claim about ML-based guards, which mostly resist these tricks.
-- `normalize()` reduces confusable/casefold evasion; it is **not** a full prompt-injection defense.
-  Combine it with semantic detection, sandboxing, and egress control.
+  a claim about ML-based guards, which mostly resist these tricks (see
+  [guard-blindspots-tr](https://github.com/fevziegeyurtsevenler/guard-blindspots-tr)).
+- **`normalize()` is only as complete as its confusable map + NFKC.** It folds the mappings it
+  knows plus combining marks; homoglyphs outside the map (e.g. `U+0261` `"ɡ"`) pass through
+  unchanged. The "100% caught" figure is on in-map evasions, not universal. Extend the map for your
+  threat model, and pair it with semantic detection, sandboxing, and egress control.
 - The confusable map is a high-value subset, not the entire Unicode confusables table.
 
 ## 🔗 Related AltaySec work
