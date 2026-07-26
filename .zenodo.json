@@ -1,0 +1,7 @@
+{
+  "title": "turkish-casefold-evasion: Bypassing Naive Prompt-Injection Filters with Turkish Case-Folding",
+  "description": "Turkish dotted/dotless I (İ/ı) and Unicode confusables break filters that do str.lower()+substring matching: 'İGNORE'.lower() is not 'ignore'. This repo measures the bypass (94.6% of evasions slip past a naive filter), ships the evasion dataset, and provides a one-line NFKC-normalize fix that catches 100%.",
+  "upload_type": "software", "access_right": "open", "license": "Apache-2.0",
+  "creators": [{"name": "Yurtsevenler, Fevzi Ege", "affiliation": "AltaySec"}],
+  "keywords": ["prompt-injection","unicode-security","turkish-nlp","case-folding","llm-security","ai-security","confusables"]
+}

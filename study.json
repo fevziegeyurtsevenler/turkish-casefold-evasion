@@ -1,0 +1,25 @@
+{
+  "triggers": 15,
+  "pairs": 37,
+  "by_evasion": {
+    "dotless-i": {
+      "n": 11,
+      "bypass_rate_naive": 0.9091,
+      "catch_rate_hardened": 1.0
+    },
+    "confusable": {
+      "n": 15,
+      "bypass_rate_naive": 1.0,
+      "catch_rate_hardened": 1.0
+    },
+    "combining-mark": {
+      "n": 11,
+      "bypass_rate_naive": 0.9091,
+      "catch_rate_hardened": 1.0
+    }
+  },
+  "overall": {
+    "bypass_rate_naive": 0.9459,
+    "catch_rate_hardened": 1.0
+  }
+}

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this, please cite it as below."
+title: "turkish-casefold-evasion: Bypassing Naive Prompt-Injection Filters with Turkish Case-Folding"
+authors:
+  - family-names: Yurtsevenler
+    given-names: Fevzi Ege
+    affiliation: AltaySec
+year: 2026
+url: "https://github.com/fevziegeyurtsevenler/turkish-casefold-evasion"
+license: Apache-2.0
+keywords: [prompt-injection, unicode-security, turkish-nlp, case-folding, llm-security, ai-security]
