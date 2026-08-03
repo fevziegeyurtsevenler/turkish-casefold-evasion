@@ -115,3 +115,10 @@ Fields: `trigger`, `evasion`, `evaded_text`, `original_caught_by_naive`,
 ```
 
 Apache-2.0 · built by **[AltaySec](https://altaysec.com.tr)** — Türkçe-first AI/LLM security.
+
+---
+
+## İlgili AltaySec Kaynakları
+
+- 📖 [Türkçe Casefold ve Dotsuz-ı Bypass'ı: 8 Harf Dönüşümü](https://altaysec.com.tr/arastirmalar/turkce-casefold-dotsuz-i-bypass) — konunun derinlemesine Türkçe analizi
+- 🌐 [AltaySec Araştırmalar](https://altaysec.com.tr/arastirmalar/) — Türkçe yapay zekâ güvenliği yazıları
